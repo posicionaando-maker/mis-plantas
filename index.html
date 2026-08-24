@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🌵 Cactus & Suculentas - Tienda APP</title>
+    
+    <!-- ========================================== -->
+    <!-- ESTILOS - Diseño APP-like mobile-first     -->
+    <!-- ========================================== -->
+    <style>
+        /* ---------- RESET Y VARIABLES ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* Elimina el flash azul en móviles */
+        }
+
+        /* Variables de color - FÁCIL DE PERSONALIZAR */
+        :root {
+            --verde-oscuro: #1e4a3a;
+            --verde-principal: #2d6a4f;
+            --verde-claro: #52b788;
+            --verde-pastel: #d8eddf;
+            --amarillo: #f9c74f;
+            --naranja: #f8961e;
+            --gris-claro: #f8f9fa;
+            --gris-medio: #ced4da;
+            --texto: #1e293b;
+            --sombra: 0 4px 20px rgba(0,0,0,0.08);
+            --radio: 20px;
+            --radio-pequeno: 12px;
+        }
+
+        /* Reset base */
+        body {
+            font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gris-claro);
+            color: var(--texto);
+            padding: 0 0 80px 0; /* Espacio para la barra inferior */
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        /* ---------- BARRA SUPERIOR (Header APP) ---------- */
+        .app-header {
+            background: white;
+            padding: 16px 20px 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.92);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--verde-principal);
+        }
+
+        .app-header .logo-icon {
+            font-size: 1.8rem;
+            background: var(--verde-pastel);
+            padding: 6px 10px;
+            border-radius: var(--radio-pequeno);
+        }
+
+        /* Botón de menú (hamburguesa) - Solo visible en móvil */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: var(--verde-pastel);
+            border: none;
+            padding: 10px 12px;
+            border-radius: var(--radio-pequeno);
+            cursor: pointer;
+            min-width: 48px;
+            min-height: 48px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: var(--verde-principal);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Menú desplegable (estilo APP) */
+        .nav-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            flex-direction: column;
+            padding: 16px 20px;
+            gap: 6px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            list-style: none;
+            border-radius: 0 0 var(--radio) var(--radio);
+        }
+
+        .nav-menu.active {
+            display: flex;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--texto);
+            padding: 14px 16px;
+            border-radius: var(--radio-pequeno);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            min-height: 48px;
+        }
+
+        .nav-menu a:active {
+            background: var(--verde-pastel);
+        }
+
+        /* ---------- CARRUSEL (Slider de destacados) ---------- */
+        .carrusel-container {
+            margin: 16px 16px 20px;
+            border-radius: var(--radio);
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            position: relative;
+            background: var(--verde-pastel);
+            aspect-ratio: 2/1; /* Proporción 2:1 para imágenes 800x400 */
+        }
+
+        .carrusel-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carrusel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .carrusel-slide .slide-content {
+            background: rgba(0,0,0,0.4);
+            padding: 20px 24px;
+            border-radius: var(--radio-pequeno);
+            text-align: center;
+            backdrop-filter: blur(4px);
+            max-width: 80%;
+        }
+
+        .carrusel-slide .slide-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .carrusel-slide .slide-content p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Puntos indicadores del carrusel */
+        .carrusel-indicadores {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5;
+        }
+
+        .carrusel-indicadores span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .carrusel-indicadores span.active {
+            background: white;
+            width: 20px;
+            border-radius: 10px;
+        }
+
+        /* ---------- BUSCADOR (estilo APP) ---------- */
+        .search-container {
+            padding: 0 16px 16px;
+            position: sticky;
+            top: 72px;
+            z-index: 50;
+            background: var(--gris-claro);
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #buscador {
+            width: 100%;
+            padding: 14px 18px 14px 48px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 16px center;
+            transition: 0.3s;
+            min-height: 48px;
+        }
+
+        #buscador:focus {
+            outline: none;
+            border-color: var(--verde-claro);
+            box-shadow: 0 0 0 4px rgba(82, 183, 136, 0.15);
+        }
+
+        /* Resultados del autocompletar */
+        #resultados-busqueda {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radio);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+            display: none;
+            z-index: 200;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 6px;
+        }
+
+        .resultado-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radio-pequeno);
+            cursor: pointer;
+            transition: 0.2s;
+            min-height: 48px;
+        }
+
+        .resultado-item:active,
+        .resultado-item:hover {
+            background: var(--verde-pastel);
+        }
+
+        .resultado-item .info {
+            flex: 1;
+        }
+
+        .resultado-item .nombre {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .resultado-item .tipo {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .resultado-item .precio {
+            font-weight: 600;
+            color: var(--verde-principal);
+        }
+
+        /* ---------- CATEGORÍAS (filtros rápidos) ---------- */
+        .categorias-rapidas {
+            padding: 0 16px 16px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .categorias-rapidas::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cat-btn {
+            padding: 10px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 40px;
+            background: white;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--texto);
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-height: 44px;
+        }
+
+        .cat-btn:active {
+            transform: scale(0.95);
+        }
+
+        .cat-btn.active {
+            background: var(--verde-principal);
+            color: white;
+            border-color: var(--verde-principal);
+        }
+
+        /* ---------- GRID DE PRODUCTOS (2 columnas en móvil) ---------- */
+        .grid-productos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            padding: 0 16px 20px;
+        }
+
+        /* ---------- TARJETA DE PLANTA (APP-like) ---------- */
+        .planta-card {
+            background: white;
+            border-radius: var(--radio);
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .planta-card:active {
+            transform: scale(0.97);
+        }
+
+        /* Contenedor de imagen - 1:1 (cuadrada) */
+        .planta-card .imagen-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: var(--verde-pastel);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .planta-card .imagen-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .planta-card:active .imagen-container img {
+            transform: scale(1.05);
+        }
+
+        /* Badge de oferta/destacado */
+        .planta-card .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--amarillo);
+            color: var(--texto);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .planta-card .badge.oferta {
+            background: var(--naranja);
+            color: white;
+        }
+
+        /* Información de la planta */
+        .planta-card .info {
+            padding: 12px 14px 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .planta-card .nombre {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--texto);
+            line-height: 1.3;
+        }
+
+        .planta-card .nombre-cientifico {
+            font-size: 0.7rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .planta-card .tipo-tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--verde-claro);
+            font-weight: 600;
+        }
+
+        /* Características (iconos) */
+        .planta-card .caracteristicas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 4px 0 8px;
+        }
+
+        .planta-card .caracteristica {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.7rem;
+            background: var(--gris-claro);
+            padding: 2px 10px 2px 6px;
+            border-radius: 30px;
+            color: #4b5563;
+        }
+
+        .planta-card .caracteristica .icono {
+            font-size: 0.8rem;
+        }
+
+        .planta-card .precio {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--verde-principal);
+            margin: 4px 0 8px;
+        }
+
+        .planta-card .precio .simbolo {
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        /* Botón de contacto por WhatsApp */
+        .planta-card .btn-whatsapp-planta {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .planta-card .btn-whatsapp-planta:active {
+            transform: scale(0.96);
+            background: #1da851;
+        }
+
+        /* ---------- SECCIÓN DE CUIDADOS BÁSICOS ---------- */
+        .cuidados-section {
+            margin: 10px 16px 24px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radio);
+            box-shadow: var(--sombra);
+        }
+
+        .cuidados-section h2 {
+            font-size: 1.2rem;
+            color: var(--verde-principal);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .cuidados-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .cuidado-item {
+            background: var(--verde-pastel);
+            padding: 14px 16px;
+            border-radius: var(--radio-pequeno);
+            text-align: center;
+        }
+
+        .cuidado-item .icono {
+            font-size: 1.8rem;
+            display: block;
+        }
+
+        .cuidado-item h4 {
+            font-size: 0.85rem;
+            color: var(--verde-principal);
+            margin: 4px 0 2px;
+        }
+
+        .cuidado-item p {
+            font-size: 0.75rem;
+            color: #4b5563;
+            margin: 0;
+        }
+
+        /* ---------- CONSEJOS PARA OFICINAS ---------- */
+        .consejos-section {
+            margin: 0 16px 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: var(--radio);
+            border-left: 4px solid var(--verde-principal);
+        }
+
+        .consejos-section h3 {
+            font-size: 1.1rem;
+            color: var(--verde-oscuro);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .consejos-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .consejos-section ul li {
+            padding: 6px 0;
+            padding-left: 24px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232d6a4f' stroke-width='2'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") no-repeat left center;
+            background-size: 16px;
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+
+        /* ---------- BARRA DE NAVEGACIÓN INFERIOR (APP-like) ---------- */
+        .app-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 env(safe-area-inset-bottom, 8px);
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.06);
+            z-index: 1000;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .app-footer .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            background: none;
+            border: none;
+            font-size: 0.6rem;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 4px 12px;
+            min-height: 48px;
+            min-width: 60px;
+            transition: 0.2s;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .app-footer .nav-item .icono {
+            font-size: 1.4rem;
+            line-height: 1.2;
+        }
+
+        .app-footer .nav-item.active {
+            color: var(--verde-principal);
+        }
+
+        .app-footer .nav-item.active::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--verde-principal);
+            border-radius: 0 0 3px 3px;
+        }
+
+        /* ---------- BOTÓN WHATSAPP FLOTANTE ---------- */
+        .whatsapp-flotante {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 900;
+            background: #25D366;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 2rem;
+            box-shadow: 0 4px 25px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            min-width: 60px;
+        }
+
+        .whatsapp-flotante:active {
+            transform: scale(0.9);
+        }
+
+        .whatsapp-flotante .pulso {
+            animation: pulso 2s infinite;
+        }
+
+        @keyframes pulso {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ---------- RESPONSIVE (Tablet y Desktop) ---------- */
+        @media (min-width: 600px) {
+            .grid-productos {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 18px;
+                padding: 0 24px 24px;
+            }
+
+            .cuidados-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .search-container {
+                padding: 0 24px 18px;
+            }
+
+            .categorias-rapidas {
+                padding: 0 24px 18px;
+            }
+
+            .carrusel-container {
+                margin: 20px 24px 24px;
+            }
+
+            .cuidados-section,
+            .consejos-section {
+                margin: 10px 24px 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-productos {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 32px 32px;
+            }
+
+            .search-container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 32px 18px;
+            }
+
+            .categorias-rapidas {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 0 32px 18px;
+                justify-content: center;
+            }
+
+            .carrusel-container {
+                max-width: 1000px;
+                margin: 24px auto 28px;
+            }
+
+            .cuidados-section,
+            .consejos-section {
+                max-width: 900px;
+                margin: 10px auto 24px;
+            }
+
+            .app-header {
+                padding: 16px 40px;
+            }
+
+            /* En desktop, el menú se muestra siempre */
+            .menu-toggle {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex !important;
+                position: static;
+                flex-direction: row;
+                padding: 0;
+                gap: 8px;
+                background: transparent;
+                box-shadow: none;
+                border-radius: 0;
+                width: auto;
+            }
+
+            .nav-menu a {
+                padding: 8px 16px;
+                min-height: auto;
+                background: transparent;
+            }
+
+            .nav-menu a:hover {
+                background: var(--verde-pastel);
+            }
+        }
+
+        /* ---------- UTILIDADES ---------- */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-16 {
+            margin-top: 16px;
+        }
+
+        .mb-16 {
+            margin-bottom: 16px;
+        }
+
+        /* Ocultar elementos */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- BARRA SUPERIOR (Header APP)               -->
+    <!-- ========================================== -->
+    <header class="app-header">
+        <div class="logo">
+            <span class="logo-icon">🌵</span>
+            <span>Cactus & Co.</span>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#" data-seccion="inicio">🏠 Inicio</a></li>
+            <li><a href="#" data-seccion="catalogo">🌱 Catálogo</a></li>
+            <li><a href="#" data-seccion="ofertas">⭐ Ofertas</a></li>
+            <li><a href="#" data-seccion="cuidados">💚 Cuidados</a></li>
+            <li><a href="#" data-seccion="contacto">📞 Contacto</a></li>
+        </ul>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL                        -->
+    <!-- ========================================== -->
+    <main>
+
+        <!-- ---------- CARRUSEL DE DESTACADOS ---------- -->
+        <section id="seccion-inicio">
+            <div class="carrusel-container" id="carrusel">
+                <div class="carrusel-slides" id="carruselSlides">
+                    <!-- Las diapositivas se generan con JavaScript -->
+                </div>
+                <div class="carrusel-indicadores" id="carruselIndicadores">
+                    <!-- Indicadores generados por JavaScript -->
+                </div>
+            </div>
+
+            <!-- ---------- CATEGORÍAS RÁPIDAS ---------- -->
+            <div class="categorias-rapidas" id="categoriasRapidas">
+                <button class="cat-btn active" data-categoria="todos">🌵 Todos</button>
+                <!-- Las categorías se generan con JavaScript -->
+            </div>
+        </section>
+
+        <!-- ---------- BUSCADOR ---------- -->
+        <div class="search-container">
+            <div class="search-wrapper">
+                <input type="text" id="buscador" placeholder="🔍 Buscar por nombre, tipo, cuidados..." autocomplete="off">
+                <div id="resultados-busqueda"></div>
+            </div>
+        </div>
+
+        <!-- ---------- GRID DE PRODUCTOS ---------- -->
+        <section id="seccion-catalogo">
+            <div class="grid-productos" id="productosGrid">
+                <!-- Las tarjetas se generan con JavaScript -->
+                <p class="text-center" style="grid-column:1/-1;color:#6b7280;padding:40px 0;">
+                    🌵 Cargando plantas...
+                </p>
+            </div>
+        </section>
+
+        <!-- ---------- OFERTAS (sección oculta por defecto) ---------- -->
+        <section id="seccion-ofertas" class="hidden">
+            <div style="padding:0 16px 16px;">
+                <h2 style="font-size:1.3rem;color:var(--verde-principal);display:flex;align-items:center;gap:10px;">
+                    ⭐ Ofertas Especiales
+                </h2>
+                <p style="color:#6b7280;font-size:0.9rem;">Plantas destacadas para tu espacio de trabajo</p>
+            </div>
+            <div class="grid-productos" id="ofertasGrid">
+                <!-- Se genera con JavaScript -->
+            </div>
+        </section>
+
+        <!-- ---------- SECCIÓN DE CUIDADOS ---------- -->
+        <section id="seccion-cuidados" class="hidden">
+            <div class="cuidados-section">
+                <h2>💚 Cuidados Básicos para Cactus y Suculentas</h2>
+                <div class="cuidados-grid" id="cuidadosGrid">
+                    <!-- Generado con JavaScript -->
+                </div>
+            </div>
+
+            <div class="consejos-section">
+                <h3>🏢 Consejos para tu Oficina</h3>
+                <ul id="consejosLista">
+                    <!-- Generado con JavaScript -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- ---------- SECCIÓN DE CONTACTO ---------- -->
+        <section id="seccion-contacto" class="hidden">
+            <div style="padding:20px 16px;text-align:center;">
+                <h2 style="font-size:1.3rem;color:var(--verde-principal);">📞 Contacto</h2>
+                <p style="color:#6b7280;margin-bottom:20px;">¿Tienes dudas o quieres hacer un pedido? ¡Escríbenos!</p>
+                
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;max-width:600px;margin:0 auto;">
+                    <div style="background:white;padding:20px;border-radius:var(--radio);box-shadow:var(--sombra);">
+                        <span style="font-size:2.5rem;">📱</span>
+                        <h3 style="font-size:0.9rem;color:#6b7280;">WhatsApp</h3>
+                        <p><a href="https://wa.me/5491123456789" style="color:var(--verde-principal);text-decoration:none;">+54 911 2345-6789</a></p>
+                    </div>
+                    <div style="background:white;padding:20px;border-radius:var(--radio);box-shadow:var(--sombra);">
+                        <span style="font-size:2.5rem;">📧</span>
+                        <h3 style="font-size:0.9rem;color:#6b7280;">Email</h3>
+                        <p><a href="mailto:info@cactusco.com" style="color:var(--verde-principal);text-decoration:none;">info@cactusco.com</a></p>
+                    </div>
+                    <div style="background:white;padding:20px;border-radius:var(--radio);box-shadow:var(--sombra);">
+                        <span style="font-size:2.5rem;">📍</span>
+                        <h3 style="font-size:0.9rem;color:#6b7280;">Dirección</h3>
+                        <p style="font-size:0.85rem;">Av. Jardines 1234, Oficina 5</p>
+                    </div>
+                    <div style="background:white;padding:20px;border-radius:var(--radio);box-shadow:var(--sombra);">
+                        <span style="font-size:2.5rem;">🕐</span>
+                        <h3 style="font-size:0.9rem;color:#6b7280;">Horario</h3>
+                        <p style="font-size:0.85rem;">Lun-Vie 9am - 6pm</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- BARRA DE NAVEGACIÓN INFERIOR (APP-like)    -->
+    <!-- ========================================== -->
+    <footer class="app-footer" id="appFooter">
+        <button class="nav-item active" data-seccion="inicio">
+            <span class="icono">🏠</span>
+            <span>Inicio</span>
+        </button>
+        <button class="nav-item" data-seccion="catalogo">
+            <span class="icono">🌱</span>
+            <span>Catálogo</span>
+        </button>
+        <button class="nav-item" data-seccion="ofertas">
+            <span class="icono">⭐</span>
+            <span>Ofertas</span>
+        </button>
+        <button class="nav-item" data-seccion="cuidados">
+            <span class="icono">💚</span>
+            <span>Cuidados</span>
+        </button>
+        <button class="nav-item" data-seccion="contacto">
+            <span class="icono">📞</span>
+            <span>Contacto</span>
+        </button>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- BOTÓN WHATSAPP FLOTANTE                    -->
+    <!-- ========================================== -->
+    <button class="whatsapp-flotante" id="whatsappFlotante" aria-label="Contactar por WhatsApp">
+        <span class="pulso">💬</span>
+    </button>
+
+    <!-- ========================================== -->
+    <!-- SCRIPTS                                    -->
+    <!-- ========================================== -->
+    <script>
+        // ============================================================
+        // 1. DATOS DE PRUEBA (se cargan desde data.json si existe)
+        //    - Estructura completa para cactus y suculentas
+        //    - Incluye todos los campos que pediste
+        // ============================================================
+        let plantasData = [{
+            "id": 1,
+            "nombre": "Echeveria Elegans",
+            "nombre_cientifico": "Echeveria elegans",
+            "tipo": "suculenta",
+            "categoria": "interior",
+            "precio": 890,
+            "descripcion": "Rosa de piedra, perfecta para escritorios. Muy resistente y fácil de cuidar.",
+            "imagen": "img/productos/echeveria.jpg",
+            "destacado": true,
+            "oferta": true,
+            "caracteristicas": {
+                "luz": "Sol indirecto",
+                "riego": "Cada 10-14 días",
+                "dificultad": "Baja",
+                "tamano": "8-12 cm",
+                "beneficios": "Purifica el aire, reduce estrés"
+            }
+        }, {
+            "id": 2,
+            "nombre": "Cactus San Pedro",
+            "nombre_cientifico": "Echinopsis pachanoi",
+            "tipo": "cactus",
+            "categoria": "interior",
+            "precio": 1250,
+            "descripcion": "Cactus columnar de crecimiento rápido. Ideal para dar altura a tu escritorio.",
+            "imagen": "img/productos/san-pedro.jpg",
+            "destacado": false,
+            "oferta": false,
+            "caracteristicas": {
+                "luz": "Sol directo",
+                "riego": "Cada 15 días",
+                "dificultad": "Media",
+                "tamano": "15-25 cm",
+                "beneficios": "Absorbe radiación de pantallas"
+            }
+        }, {
+            "id": 3,
+            "nombre": "Suculenta Cola de Burro",
+            "nombre_cientifico": "Sedum morganianum",
+            "tipo": "suculenta",
+            "categoria": "colgante",
+            "precio": 1100,
+            "descripcion": "Colgante ideal para macetas altas o estanterías. Sus hojas parecen pequeñas cuentas.",
+            "imagen": "img/productos/cola-burro.jpg",
+            "destacado": true,
+            "oferta": true,
+            "caracteristicas": {
+                "luz": "Sol indirecto",
+                "riego": "Cada 10 días",
+                "dificultad": "Baja",
+                "tamano": "20-30 cm (colgante)",
+                "beneficios": "Decora espacios verticales"
+            }
+        }, {
+            "id": 4,
+            "nombre": "Cactus Bola de Nieve",
+            "nombre_cientifico": "Mammillaria geminispina",
+            "tipo": "cactus",
+            "categoria": "interior",
+            "precio": 950,
+            "descripcion": "Pequeño cactus redondo con espinas blancas. Perfecto para micro-espacios.",
+            "imagen": "img/productos/bola-nieve.jpg",
+            "destacado": false,
+            "oferta": false,
+            "caracteristicas": {
+                "luz": "Sol directo",
+                "riego": "Cada 20 días",
+                "dificultad": "Baja",
+                "tamano": "6-8 cm",
+                "beneficios": "Ideal para principiantes"
+            }
+        }, {
+            "id": 5,
+            "nombre": "Aloe Vera",
+            "nombre_cientifico": "Aloe barbadensis",
+            "tipo": "suculenta",
+            "categoria": "interior",
+            "precio": 1450,
+            "descripcion": "Planta medicinal con múltiples usos. Perfecta para tener cerca en el trabajo.",
+            "imagen": "img/productos/aloe-vera.jpg",
+            "destacado": true,
+            "oferta": true,
+            "caracteristicas": {
+                "luz": "Sol indirecto",
+                "riego": "Cada 14 días",
+                "dificultad": "Baja",
+                "tamano": "20-30 cm",
+                "beneficios": "Propiedades curativas, purifica el aire"
+            }
+        }, {
+            "id": 6,
+            "nombre": "Cactus Estrella",
+            "nombre_cientifico": "Astrophytum asterias",
+            "tipo": "cactus",
+            "categoria": "interior",
+            "precio": 1800,
+            "descripcion": "Cactus con forma de estrella, sin espinas. Muy buscado por coleccionistas.",
+            "imagen": "img/productos/estrella.jpg",
+            "destacado": true,
+            "oferta": false,
+            "caracteristicas": {
+                "luz": "Sol directo",
+                "riego": "Cada 20 días",
+                "dificultad": "Media-Alta",
+                "tamano": "5-8 cm",
+                "beneficios": "Pieza de colección, conversación garantizada"
+            }
+        }, {
+            "id": 7,
+            "nombre": "Sedum Burrito",
+            "nombre_cientifico": "Sedum burrito",
+            "tipo": "suculenta",
+            "categoria": "colgante",
+            "precio": 1300,
+            "descripcion": "Parecido a la cola de burro pero con hojas más pequeñas y compactas.",
+            "imagen": "img/productos/burrito.jpg",
+            "destacado": false,
+            "oferta": false,
+            "caracteristicas": {
+                "luz": "Sol indirecto",
+                "riego": "Cada 10-12 días",
+                "dificultad": "Baja",
+                "tamano": "15-20 cm",
+                "beneficios": "Perfecto para macetas colgantes"
+            }
+        }, {
+            "id": 8,
+            "nombre": "Cactus de Navidad",
+            "nombre_cientifico": "Schlumbergera truncata",
+            "tipo": "cactus",
+            "categoria": "interior",
+            "precio": 1600,
+            "descripcion": "Cactus que florece en invierno. Sus flores rosas o rojas son espectaculares.",
+            "imagen": "img/productos/navidad.jpg",
+            "destacado": true,
+            "oferta": true,
+            "caracteristicas": {
+                "luz": "Sol indirecto",
+                "riego": "Cada 10 días",
+                "dificultad": "Media",
+                "tamano": "15-20 cm",
+                "beneficios": "Florece en épocas de poco sol"
+            }
+        }];
+
+        // ============================================================
+        // 2. ESTADO DE LA APLICACIÓN
+        // ============================================================
+        let plantas = [];
+        let seccionActual = 'inicio';
+        let categoriaActual = 'todos';
+        let carruselInterval = null;
+        let slideActual = 0;
+
+        // ============================================================
+        // 3. FUNCIÓN PARA CARGAR DATOS DESDE data.json
+        //    - Si falla, usa los datos de prueba
+        // ============================================================
+        async function cargarDatos() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('No se encontró data.json');
+                const data = await response.json();
+                plantas = data.plantas || [];
+                console.log('✅ Datos cargados desde data.json');
+            } catch (error) {
+                console.warn('⚠️ Usando datos de prueba (data.json no encontrado)');
+                plantas = plantasData;
+            }
+            // Inicializar la app
+            inicializarApp();
+        }
+
+        // ============================================================
+        // 4. INICIALIZAR APLICACIÓN
+        // ============================================================
+        function inicializarApp() {
+            // Generar categorías únicas desde los datos
+            generarCategorias();
+
+            // Generar carrusel
+            generarCarrusel();
+
+            // Renderizar productos
+            renderizarProductos(plantas);
+
+            // Renderizar ofertas
+            renderizarOfertas();
+
+            // Renderizar cuidados
+            renderizarCuidados();
+
+            // Renderizar consejos
+            renderizarConsejos();
+
+            // Configurar eventos
+            configurarEventos();
+
+            // Mostrar sección inicial
+            mostrarSeccion('inicio');
+        }
+
+        // ============================================================
+        // 5. GENERAR CATEGORÍAS (desde los datos)
+        // ============================================================
+        function generarCategorias() {
+            const container = document.getElementById('categoriasRapidas');
+            // Obtener tipos únicos
+            const tipos = [...new Set(plantas.map(p => p.tipo))];
+            // Limpiar y agregar botones
+            container.innerHTML = `<button class="cat-btn active" data-categoria="todos">🌵 Todos</button>`;
+            tipos.forEach(tipo => {
+                const btn = document.createElement('button');
+                btn.className = 'cat-btn';
+                btn.dataset.categoria = tipo;
+                // Icono según tipo
+                const icono = tipo === 'cactus' ? '🌵' : '🌱';
+                btn.textContent = `${icono} ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}s`;
+                container.appendChild(btn);
+            });
+        }
+
+        // ============================================================
+        // 6. GENERAR CARRUSEL
+        //    - Tamaño de imagen: 800x400px (2:1)
+        // ============================================================
+        function generarCarrusel() {
+            const slidesContainer = document.getElementById('carruselSlides');
+            const indicadores = document.getElementById('carruselIndicadores');
+
+            // Seleccionar plantas destacadas para el carrusel (máximo 4)
+            const destacados = plantas.filter(p => p.destacado).slice(0, 4);
+
+            if (destacados.length === 0) {
+                // Si no hay destacados, usar los primeros 3
+                destacados.push(...plantas.slice(0, 3));
+            }
+
+            // Generar slides
+            slidesContainer.innerHTML = destacados.map((p, index) => `
+                        <div class="carrusel-slide" style="background: linear-gradient(135deg, ${index % 2 === 0 ? '#2d6a4f' : '#52b788'}, ${index % 3 === 0 ? '#1e4a3a' : '#40916c'});">
+                            <div class="slide-content">
+                                <h2>🌵 ${p.nombre}</h2>
+                                <p>${p.descripcion.substring(0, 60)}${p.descripcion.length > 60 ? '...' : ''}</p>
+                                <p style="font-size:1.2rem;font-weight:700;">$${p.precio}</p>
+                            </div>
+                        </div>
+                    `).join('');
+
+            // Generar indicadores
+            indicadores.innerHTML = destacados.map((_, index) =>
+                `<span class="${index === 0 ? 'active' : ''}" data-slide="${index}"></span>`
+            ).join('');
+
+            // Iniciar auto-slide
+            iniciarCarrusel(destacados.length);
+        }
+
+        // ============================================================
+        // 7. AUTO-SLIDE DEL CARRUSEL
+        // ============================================================
+        function iniciarCarrusel(totalSlides) {
+            if (carruselInterval) clearInterval(carruselInterval);
+
+            carruselInterval = setInterval(() => {
+                slideActual = (slideActual + 1) % totalSlides;
+                moverCarrusel(slideActual);
+            }, 5000);
+
+            // Eventos para los indicadores
+            document.querySelectorAll('.carrusel-indicadores span').forEach(el => {
+                el.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.slide);
+                    slideActual = index;
+                    moverCarrusel(index);
+                    // Reiniciar intervalo
+                    clearInterval(carruselInterval);
+                    iniciarCarrusel(totalSlides);
+                });
+            });
+        }
+
+        function moverCarrusel(index) {
+            const slides = document.getElementById('carruselSlides');
+            const indicadores = document.querySelectorAll('.carrusel-indicadores span');
+
+            slides.style.transform = `translateX(-${index * 100}%)`;
+
+            indicadores.forEach((el, i) => {
+                el.classList.toggle('active', i === index);
+            });
+        }
+
+        // ============================================================
+        // 8. RENDERIZAR PRODUCTOS EN EL GRID
+        //    - Tamaño de imagen: 400x400px (cuadrada)
+        // ============================================================
+        function renderizarProductos(lista) {
+            const grid = document.getElementById('productosGrid');
+
+            if (!lista || lista.length === 0) {
+                grid.innerHTML = `
+                            <p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:40px 0;">
+                                🌵 No hay plantas disponibles
+                            </p>
+                        `;
+                return;
+            }
+
+            grid.innerHTML = lista.map(p => `
+                        <div class="planta-card" data-id="${p.id}">
+                            <div class="imagen-container">
+                                <img src="${p.imagen || 'img/placeholder.jpg'}" 
+                                     alt="${p.nombre}" 
+                                     loading="lazy"
+                                     onerror="this.src='img/placeholder.jpg'">
+                                ${p.oferta ? '<span class="badge oferta">⭐ Oferta</span>' : ''}
+                                ${p.destacado && !p.oferta ? '<span class="badge">✨ Destacado</span>' : ''}
+                            </div>
+                            <div class="info">
+                                <div class="tipo-tag">${p.tipo} · ${p.categoria}</div>
+                                <div class="nombre">${p.nombre}</div>
+                                <div class="nombre-cientifico">${p.nombre_cientifico || ''}</div>
+                                <div class="caracteristicas">
+                                    <span class="caracteristica">
+                                        <span class="icono">☀️</span> ${p.caracteristicas?.luz || 'N/A'}
+                                    </span>
+                                    <span class="caracteristica">
+                                        <span class="icono">💧</span> ${p.caracteristicas?.riego || 'N/A'}
+                                    </span>
+                                    <span class="caracteristica">
+                                        <span class="icono">📏</span> ${p.caracteristicas?.tamano || 'N/A'}
+                                    </span>
+                                </div>
+                                <div class="precio">
+                                    <span class="simbolo">$</span>${p.precio.toLocaleString()}
+                                </div>
+                                <button class="btn-whatsapp-planta" data-id="${p.id}">
+                                    💬 Consultar por WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+
+            // Eventos para los botones de WhatsApp de cada tarjeta
+            document.querySelectorAll('.btn-whatsapp-planta').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    const planta = plantas.find(p => p.id === id);
+                    if (planta) abrirWhatsApp(planta);
+                });
+            });
+        }
+
+        // ============================================================
+        // 9. RENDERIZAR OFERTAS
+        // ============================================================
+        function renderizarOfertas() {
+            const grid = document.getElementById('ofertasGrid');
+            const ofertas = plantas.filter(p => p.oferta);
+
+            if (ofertas.length === 0) {
+                grid.innerHTML = `
+                            <p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:30px 0;">
+                                🌵 No hay ofertas disponibles en este momento
+                            </p>
+                        `;
+                return;
+            }
+
+            // Usamos la misma función de renderizado pero con un wrapper
+            grid.innerHTML = ofertas.map(p => `
+                        <div class="planta-card" data-id="${p.id}">
+                            <div class="imagen-container">
+                                <img src="${p.imagen || 'img/placeholder.jpg'}" 
+                                     alt="${p.nombre}" 
+                                     loading="lazy"
+                                     onerror="this.src='img/placeholder.jpg'">
+                                <span class="badge oferta">⭐ Oferta</span>
+                            </div>
+                            <div class="info">
+                                <div class="tipo-tag">${p.tipo} · ${p.categoria}</div>
+                                <div class="nombre">${p.nombre}</div>
+                                <div class="nombre-cientifico">${p.nombre_cientifico || ''}</div>
+                                <div class="caracteristicas">
+                                    <span class="caracteristica">
+                                        <span class="icono">☀️</span> ${p.caracteristicas?.luz || 'N/A'}
+                                    </span>
+                                    <span class="caracteristica">
+                                        <span class="icono">💧</span> ${p.caracteristicas?.riego || 'N/A'}
+                                    </span>
+                                </div>
+                                <div class="precio">
+                                    <span class="simbolo">$</span>${p.precio.toLocaleString()}
+                                </div>
+                                <button class="btn-whatsapp-planta" data-id="${p.id}">
+                                    💬 Consultar por WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+
+            // Eventos para los botones de WhatsApp en ofertas
+            document.querySelectorAll('#ofertasGrid .btn-whatsapp-planta').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    const planta = plantas.find(p => p.id === id);
+                    if (planta) abrirWhatsApp(planta);
+                });
+            });
+        }
+
+        // ============================================================
+        // 10. RENDERIZAR CUIDADOS BÁSICOS
+        // ============================================================
+        function renderizarCuidados() {
+            const grid = document.getElementById('cuidadosGrid');
+
+            const cuidados = [{
+                icono: '☀️',
+                titulo: 'Luz',
+                descripcion: 'Sol indirecto para suculentas, directo para cactus'
+            }, {
+                icono: '💧',
+                titulo: 'Riego',
+                descripcion: 'Espera que el sustrato se seque completamente'
+            }, {
+                icono: '🌡️',
+                titulo: 'Temperatura',
+                descripcion: 'Entre 18-28°C, evitar corrientes de aire'
+            }, {
+                icono: '🏺',
+                titulo: 'Maceta',
+                descripcion: 'Con drenaje, tamaño adecuado a la raíz'
+            }, {
+                icono: '🧪',
+                titulo: 'Sustrato',
+                descripcion: 'Mezcla con arena y perlita para buen drenaje'
+            }, {
+                icono: '💚',
+                titulo: 'Abono',
+                descripcion: 'Fertilizante específico en primavera-verano'
+            }, {
+                icono: '🐛',
+                titulo: 'Plagas',
+                descripcion: 'Revisar cochinillas y hongos, tratar con jabón potásico'
+            }, {
+                icono: '✂️',
+                titulo: 'Poda',
+                descripcion: 'Quitar hojas secas y flores marchitas'
+            }];
+
+            grid.innerHTML = cuidados.map(c => `
+                        <div class="cuidado-item">
+                            <span class="icono">${c.icono}</span>
+                            <h4>${c.titulo}</h4>
+                            <p>${c.descripcion}</p>
+                        </div>
+                    `).join('');
+        }
+
+        // ============================================================
+        // 11. RENDERIZAR CONSEJOS PARA OFICINAS
+        // ============================================================
+        function renderizarConsejos() {
+            const lista = document.getElementById('consejosLista');
+
+            const consejos = [
+                'Coloca suculentas en tu escritorio: reducen el estrés y mejoran la concentración',
+                'Elige macetas con colores neutros para integrarlas con la decoración de la oficina',
+                'Las plantas colgantes como la "Cola de Burro" ahorran espacio en escritorios pequeños',
+                'El Aloe Vera es perfecto para oficinas: purifica el aire y es útil para pequeñas quemaduras',
+                'Crea un "mini jardín" con 3 macetas de diferentes alturas para dar dinamismo visual',
+                'Los cactus redondos son ideales para micro-espacios junto al monitor',
+                'Rota las plantas cada semana para que reciban luz pareja y crezcan rectas',
+                'Usa macetas con autorriego para evitar olvidos en fines de semana largos'
+            ];
+
+            lista.innerHTML = consejos.map(c => `<li>${c}</li>`).join('');
+        }
+
+        // ============================================================
+        // 12. ABRIR WHATSAPP CON MENSAJE PERSONALIZADO
+        //     - Mensaje: "Hola, me interesa [planta]"
+        // ============================================================
+        function abrirWhatsApp(planta) {
+            // Número de WhatsApp - CAMBIAR POR EL TUYO
+            const numero = '5491123456789';
+
+            const mensaje = `Hola 🌵 Me interesa la planta *${planta.nombre}* (${planta.nombre_cientifico || ''}). ¿Podrían darme más información?`;
+
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        }
+
+        // ============================================================
+        // 13. WHATSAPP FLOTANTE (botón global)
+        // ============================================================
+        document.getElementById('whatsappFlotante').addEventListener('click', function() {
+            const numero = '5491123456789';
+            const mensaje = 'Hola 🌵 Me interesa conocer sus plantas y suculentas para mi espacio de trabajo.';
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        });
+
+        // ============================================================
+        // 14. CONFIGURAR EVENTOS
+        // ============================================================
+        function configurarEventos() {
+            // --- Menú hamburguesa ---
+            const toggle = document.getElementById('menuToggle');
+            const menu = document.getElementById('navMenu');
+
+            toggle.addEventListener('click', function() {
+                menu.classList.toggle('active');
+                this.classList.toggle('active');
+            });
+
+            // Cerrar menú al seleccionar una opción
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const seccion = this.dataset.seccion;
+                    if (seccion) {
+                        mostrarSeccion(seccion);
+                        // Cerrar menú
+                        menu.classList.remove('active');
+                        toggle.classList.remove('active');
+                    }
+                });
+            });
+
+            // --- Navegación inferior (footer) ---
+            document.querySelectorAll('.app-footer .nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const seccion = this.dataset.seccion;
+                    if (seccion) {
+                        mostrarSeccion(seccion);
+                    }
+                });
+            });
+
+            // --- Filtros por categoría ---
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Actualizar estado visual
+                    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    categoriaActual = this.dataset.categoria;
+
+                    // Filtrar productos
+                    const filtrados = categoriaActual === 'todos' ?
+                        plantas :
+                        plantas.filter(p => p.tipo === categoriaActual);
+
+                    renderizarProductos(filtrados);
+
+                    // Cambiar a sección catálogo
+                    mostrarSeccion('catalogo');
+                });
+            });
+
+            // --- Buscador con autocompletar ---
+            const buscador = document.getElementById('buscador');
+            const resultados = document.getElementById('resultados-busqueda');
+            let timeout = null;
+
+            buscador.addEventListener('input', function() {
+                clearTimeout(timeout);
+                const termino = this.value.trim().toLowerCase();
+
+                if (termino.length < 2) {
+                    resultados.style.display = 'none';
+                    return;
+                }
+
+                timeout = setTimeout(() => {
+                    const coincidencias = plantas.filter(p =>
+                        p.nombre.toLowerCase().includes(termino) ||
+                        p.nombre_cientifico.toLowerCase().includes(termino) ||
+                        p.tipo.toLowerCase().includes(termino) ||
+                        p.categoria.toLowerCase().includes(termino) ||
+                        (p.caracteristicas?.luz || '').toLowerCase().includes(termino) ||
+                        (p.caracteristicas?.riego || '').toLowerCase().includes(termino) ||
+                        (p.caracteristicas?.beneficios || '').toLowerCase().includes(termino)
+                    );
+
+                    if (coincidencias.length === 0) {
+                        resultados.innerHTML =
+                            '<div style="padding:16px;text-align:center;color:#6b7280;">No se encontraron plantas</div>';
+                        resultados.style.display = 'block';
+                        return;
+                    }
+
+                    resultados.innerHTML = coincidencias.slice(0, 8).map(p => `
+                                <div class="resultado-item" data-id="${p.id}">
+                                    <div class="info">
+                                        <div class="nombre">${p.nombre}</div>
+                                        <div class="tipo">${p.tipo} · ${p.categoria}</div>
+                                    </div>
+                                    <div class="precio">$${p.precio.toLocaleString()}</div>
+                                </div>
+                            `).join('');
+
+                    resultados.style.display = 'block';
+
+                    // Al hacer clic en un resultado, ir al catálogo filtrado
+                    document.querySelectorAll('.resultado-item').forEach(item => {
+                        item.addEventListener('click', function() {
+                            const id = parseInt(this.dataset.id);
+                            const planta = plantas.find(p => p.id === id);
+                            if (planta) {
+                                // Filtrar solo esa planta
+                                renderizarProductos([planta]);
+                                mostrarSeccion('catalogo');
+                                buscador.value = '';
+                                resultados.style.display = 'none';
+                            }
+                        });
+                    });
+
+                }, 300);
+            });
+
+            // Cerrar resultados al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-wrapper')) {
+                    resultados.style.display = 'none';
+                }
+            });
+
+            // --- Cerrar menú al hacer scroll ---
+            document.addEventListener('scroll', () => {
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    toggle.classList.remove('active');
+                }
+            });
+        }
+
+        // ============================================================
+        // 15. MOSTRAR SECCIÓN (navegación APP-like)
+        // ============================================================
+        function mostrarSeccion(seccion) {
+            seccionActual = seccion;
+
+            // Ocultar todas las secciones
+            document.getElementById('seccion-inicio').style.display = 'block';
+            document.getElementById('seccion-catalogo').style.display = 'block';
+            document.getElementById('seccion-ofertas').classList.add('hidden');
+            document.getElementById('seccion-cuidados').classList.add('hidden');
+            document.getElementById('seccion-contacto').classList.add('hidden');
+
+            // Mostrar la sección seleccionada
+            switch (seccion) {
+                case 'inicio':
+                    document.getElementById('seccion-inicio').style.display = 'block';
+                    document.getElementById('seccion-catalogo').style.display = 'block';
+                    break;
+                case 'catalogo':
+                    document.getElementById('seccion-inicio').style.display = 'none';
+                    document.getElementById('seccion-catalogo').style.display = 'block';
+                    // Restaurar filtro actual
+                    const filtrados = categoriaActual === 'todos' ?
+                        plantas :
+                        plantas.filter(p => p.tipo === categoriaActual);
+                    renderizarProductos(filtrados);
+                    break;
+                case 'ofertas':
+                    document.getElementById('seccion-inicio').style.display = 'none';
+                    document.getElementById('seccion-catalogo').style.display = 'none';
+                    document.getElementById('seccion-ofertas').classList.remove('hidden');
+                    break;
+                case 'cuidados':
+                    document.getElementById('seccion-inicio').style.display = 'none';
+                    document.getElementById('seccion-catalogo').style.display = 'none';
+                    document.getElementById('seccion-cuidados').classList.remove('hidden');
+                    break;
+                case 'contacto':
+                    document.getElementById('seccion-inicio').style.display = 'none';
+                    document.getElementById('seccion-catalogo').style.display = 'none';
+                    document.getElementById('seccion-contacto').classList.remove('hidden');
+                    break;
+            }
+
+            // Actualizar barra inferior
+            document.querySelectorAll('.app-footer .nav-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.seccion === seccion);
+            });
+
+            // Scroll al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // 16. INICIAR APLICACIÓN
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            cargarDatos();
+        });
+
+        // ============================================================
+        // 17. EXPONER FUNCIONES PARA DEBUG (opcional)
+        // ============================================================
+        console.log('🌵 Tienda Cactus & Co. cargada');
+        console.log('📝 Para cambiar el número de WhatsApp, busca "const numero" en el script');
+        console.log('🖼️ Tamaños de imagen: Carrusel 800x400px | Productos 400x400px');
+        console.log('📁 Coloca tus imágenes en: img/productos/ y img/carrusel/');
+    </script>
+
+</body>
+</html>
