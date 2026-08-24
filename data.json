@@ -1,0 +1,156 @@
+{
+  "plantas": [
+    {
+      "id": 1,
+      "nombre": "Echeveria Elegans",
+      "nombre_cientifico": "Echeveria elegans",
+      "tipo": "suculenta",
+      "categoria": "interior",
+      "precio": 890,
+      "descripcion": "Rosa de piedra, perfecta para escritorios. Muy resistente y fácil de cuidar.",
+      "imagen": "img/productos/echeveria.jpg",
+      "destacado": true,
+      "oferta": true,
+      "caracteristicas": {
+        "luz": "Sol indirecto",
+        "riego": "Cada 10-14 días",
+        "dificultad": "Baja",
+        "tamano": "8-12 cm",
+        "beneficios": "Purifica el aire, reduce estrés"
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Cactus San Pedro",
+      "nombre_cientifico": "Echinopsis pachanoi",
+      "tipo": "cactus",
+      "categoria": "interior",
+      "precio": 1250,
+      "descripcion": "Cactus columnar de crecimiento rápido. Ideal para dar altura a tu escritorio.",
+      "imagen": "img/productos/san-pedro.jpg",
+      "destacado": false,
+      "oferta": false,
+      "caracteristicas": {
+        "luz": "Sol directo",
+        "riego": "Cada 15 días",
+        "dificultad": "Media",
+        "tamano": "15-25 cm",
+        "beneficios": "Absorbe radiación de pantallas"
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Suculenta Cola de Burro",
+      "nombre_cientifico": "Sedum morganianum",
+      "tipo": "suculenta",
+      "categoria": "colgante",
+      "precio": 1100,
+      "descripcion": "Colgante ideal para macetas altas o estanterías. Sus hojas parecen pequeñas cuentas.",
+      "imagen": "img/productos/cola-burro.jpg",
+      "destacado": true,
+      "oferta": true,
+      "caracteristicas": {
+        "luz": "Sol indirecto",
+        "riego": "Cada 10 días",
+        "dificultad": "Baja",
+        "tamano": "20-30 cm (colgante)",
+        "beneficios": "Decora espacios verticales"
+      }
+    },
+    {
+      "id": 4,
+      "nombre": "Cactus Bola de Nieve",
+      "nombre_cientifico": "Mammillaria geminispina",
+      "tipo": "cactus",
+      "categoria": "interior",
+      "precio": 950,
+      "descripcion": "Pequeño cactus redondo con espinas blancas. Perfecto para micro-espacios.",
+      "imagen": "img/productos/bola-nieve.jpg",
+      "destacado": false,
+      "oferta": false,
+      "caracteristicas": {
+        "luz": "Sol directo",
+        "riego": "Cada 20 días",
+        "dificultad": "Baja",
+        "tamano": "6-8 cm",
+        "beneficios": "Ideal para principiantes"
+      }
+    },
+    {
+      "id": 5,
+      "nombre": "Aloe Vera",
+      "nombre_cientifico": "Aloe barbadensis",
+      "tipo": "suculenta",
+      "categoria": "interior",
+      "precio": 1450,
+      "descripcion": "Planta medicinal con múltiples usos. Perfecta para tener cerca en el trabajo.",
+      "imagen": "img/productos/aloe-vera.jpg",
+      "destacado": true,
+      "oferta": true,
+      "caracteristicas": {
+        "luz": "Sol indirecto",
+        "riego": "Cada 14 días",
+        "dificultad": "Baja",
+        "tamano": "20-30 cm",
+        "beneficios": "Propiedades curativas, purifica el aire"
+      }
+    },
+    {
+      "id": 6,
+      "nombre": "Cactus Estrella",
+      "nombre_cientifico": "Astrophytum asterias",
+      "tipo": "cactus",
+      "categoria": "interior",
+      "precio": 1800,
+      "descripcion": "Cactus con forma de estrella, sin espinas. Muy buscado por coleccionistas.",
+      "imagen": "img/productos/estrella.jpg",
+      "destacado": true,
+      "oferta": false,
+      "caracteristicas": {
+        "luz": "Sol directo",
+        "riego": "Cada 20 días",
+        "dificultad": "Media-Alta",
+        "tamano": "5-8 cm",
+        "beneficios": "Pieza de colección, conversación garantizada"
+      }
+    },
+    {
+      "id": 7,
+      "nombre": "Sedum Burrito",
+      "nombre_cientifico": "Sedum burrito",
+      "tipo": "suculenta",
+      "categoria": "colgante",
+      "precio": 1300,
+      "descripcion": "Parecido a la cola de burro pero con hojas más pequeñas y compactas.",
+      "imagen": "img/productos/burrito.jpg",
+      "destacado": false,
+      "oferta": false,
+      "caracteristicas": {
+        "luz": "Sol indirecto",
+        "riego": "Cada 10-12 días",
+        "dificultad": "Baja",
+        "tamano": "15-20 cm",
+        "beneficios": "Perfecto para macetas colgantes"
+      }
+    },
+    {
+      "id": 8,
+      "nombre": "Cactus de Navidad",
+      "nombre_cientifico": "Schlumbergera truncata",
+      "tipo": "cactus",
+      "categoria": "interior",
+      "precio": 1600,
+      "descripcion": "Cactus que florece en invierno. Sus flores rosas o rojas son espectaculares.",
+      "imagen": "img/productos/navidad.jpg",
+      "destacado": true,
+      "oferta": true,
+      "caracteristicas": {
+        "luz": "Sol indirecto",
+        "riego": "Cada 10 días",
+        "dificultad": "Media",
+        "tamano": "15-20 cm",
+        "beneficios": "Florece en épocas de poco sol"
+      }
+    }
+  ]
+}
