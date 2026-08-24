@@ -1,4 +1,8 @@
 {
+  "config": {
+    "placeholder": "img/placeholder.jpg",
+    "carrusel_default": "img/carrusel/default.jpg"
+  },
   "plantas": [
     {
       "id": 1,
@@ -9,6 +13,7 @@
       "precio": 890,
       "descripcion": "Rosa de piedra, perfecta para escritorios. Muy resistente y fácil de cuidar.",
       "imagen": "img/productos/echeveria.jpg",
+      "imagen_carrusel": "img/carrusel/echeveria-slide.jpg",
       "destacado": true,
       "oferta": true,
       "caracteristicas": {
@@ -28,6 +33,7 @@
       "precio": 1250,
       "descripcion": "Cactus columnar de crecimiento rápido. Ideal para dar altura a tu escritorio.",
       "imagen": "img/productos/san-pedro.jpg",
+      "imagen_carrusel": "img/carrusel/san-pedro-slide.jpg",
       "destacado": false,
       "oferta": false,
       "caracteristicas": {
@@ -47,6 +53,7 @@
       "precio": 1100,
       "descripcion": "Colgante ideal para macetas altas o estanterías. Sus hojas parecen pequeñas cuentas.",
       "imagen": "img/productos/cola-burro.jpg",
+      "imagen_carrusel": "img/carrusel/cola-burro-slide.jpg",
       "destacado": true,
       "oferta": true,
       "caracteristicas": {
@@ -66,6 +73,7 @@
       "precio": 950,
       "descripcion": "Pequeño cactus redondo con espinas blancas. Perfecto para micro-espacios.",
       "imagen": "img/productos/bola-nieve.jpg",
+      "imagen_carrusel": "img/carrusel/bola-nieve-slide.jpg",
       "destacado": false,
       "oferta": false,
       "caracteristicas": {
@@ -85,6 +93,7 @@
       "precio": 1450,
       "descripcion": "Planta medicinal con múltiples usos. Perfecta para tener cerca en el trabajo.",
       "imagen": "img/productos/aloe-vera.jpg",
+      "imagen_carrusel": "img/carrusel/aloe-vera-slide.jpg",
       "destacado": true,
       "oferta": true,
       "caracteristicas": {
@@ -104,6 +113,7 @@
       "precio": 1800,
       "descripcion": "Cactus con forma de estrella, sin espinas. Muy buscado por coleccionistas.",
       "imagen": "img/productos/estrella.jpg",
+      "imagen_carrusel": "img/carrusel/estrella-slide.jpg",
       "destacado": true,
       "oferta": false,
       "caracteristicas": {
@@ -123,6 +133,7 @@
       "precio": 1300,
       "descripcion": "Parecido a la cola de burro pero con hojas más pequeñas y compactas.",
       "imagen": "img/productos/burrito.jpg",
+      "imagen_carrusel": "img/carrusel/burrito-slide.jpg",
       "destacado": false,
       "oferta": false,
       "caracteristicas": {
@@ -142,6 +153,7 @@
       "precio": 1600,
       "descripcion": "Cactus que florece en invierno. Sus flores rosas o rojas son espectaculares.",
       "imagen": "img/productos/navidad.jpg",
+      "imagen_carrusel": "img/carrusel/navidad-slide.jpg",
       "destacado": true,
       "oferta": true,
       "caracteristicas": {
