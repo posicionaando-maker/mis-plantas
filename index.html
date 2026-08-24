@@ -17,7 +17,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Variables de color - FÁCIL DE PERSONALIZAR */
         :root {
             --verde-oscuro: #1e4a3a;
             --verde-principal: #2d6a4f;
@@ -33,7 +32,6 @@
             --radio-pequeno: 12px;
         }
 
-        /* Reset base */
         html, body {
             height: 100%;
             overflow-x: hidden;
@@ -46,11 +44,10 @@
             padding: 0 0 80px 0;
             line-height: 1.5;
             min-height: 100vh;
-            /* Evita el rebote en iOS */
             overscroll-behavior: none;
         }
 
-        /* ---------- BARRA SUPERIOR (Header APP) ---------- */
+        /* ---------- BARRA SUPERIOR ---------- */
         .app-header {
             background: white;
             padding: 16px 20px 12px;
@@ -151,7 +148,7 @@
             background: var(--verde-pastel);
         }
 
-        /* ---------- CARRUSEL (Slider de destacados) ---------- */
+        /* ---------- CARRUSEL ---------- */
         .carrusel-container {
             margin: 16px 16px 20px;
             border-radius: var(--radio);
@@ -183,7 +180,7 @@
         }
 
         .carrusel-slide .slide-content {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
             padding: 20px 24px;
             border-radius: var(--radio-pequeno);
             text-align: center;
@@ -308,7 +305,7 @@
             color: var(--verde-principal);
         }
 
-        /* ---------- CATEGORÍAS (filtros rápidos) ---------- */
+        /* ---------- CATEGORÍAS ---------- */
         .categorias-rapidas {
             padding: 0 16px 16px;
             display: flex;
@@ -866,32 +863,21 @@
     <script>
         // ============================================================
         // 1. OCULTAR BARRA DE NAVEGACIÓN DEL NAVEGADOR
-        //    - Esto hace que la web se vea como una app nativa
         // ============================================================
         function ocultarBarraNavegacion() {
-            // Solicitar pantalla completa en dispositivos móviles
             if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen().catch(() => {
-                    // Silenciar error si no se permite (ej: escritorio)
-                });
+                document.documentElement.requestFullscreen().catch(() => {});
             }
-            
-            // Para iOS (Safari) - ocultar barras con scroll
             window.scrollTo(0, 1);
-            
-            // También intentar con la API de pantalla completa específica para móviles
             if (document.documentElement.webkitRequestFullscreen) {
                 document.documentElement.webkitRequestFullscreen();
             }
         }
 
-        // Intentar ocultar al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
-            // Pequeño retraso para asegurar que la página está lista
             setTimeout(ocultarBarraNavegacion, 500);
         });
 
-        // También al hacer clic en cualquier parte (para usuarios que salen del modo)
         document.addEventListener('click', function() {
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 setTimeout(ocultarBarraNavegacion, 300);
@@ -899,7 +885,16 @@
         });
 
         // ============================================================
-        // 2. DATOS DE PRUEBA (se cargan desde data.json si existe)
+        // 2. CONFIGURACIÓN GLOBAL
+        //    - Se carga desde data.json
+        // ============================================================
+        let config = {
+            placeholder: 'img/placeholder.jpg',
+            carrusel_default: 'img/carrusel/default.jpg'
+        };
+
+        // ============================================================
+        // 3. DATOS DE PRUEBA (fallback si no hay data.json)
         // ============================================================
         let plantasData = [{
             "id": 1,
@@ -910,6 +905,7 @@
             "precio": 890,
             "descripcion": "Rosa de piedra, perfecta para escritorios. Muy resistente y fácil de cuidar.",
             "imagen": "img/productos/echeveria.jpg",
+            "imagen_carrusel": "img/carrusel/echeveria-slide.jpg",
             "destacado": true,
             "oferta": true,
             "caracteristicas": {
@@ -928,6 +924,7 @@
             "precio": 1250,
             "descripcion": "Cactus columnar de crecimiento rápido. Ideal para dar altura a tu escritorio.",
             "imagen": "img/productos/san-pedro.jpg",
+            "imagen_carrusel": "img/carrusel/san-pedro-slide.jpg",
             "destacado": false,
             "oferta": false,
             "caracteristicas": {
@@ -946,6 +943,7 @@
             "precio": 1100,
             "descripcion": "Colgante ideal para macetas altas o estanterías. Sus hojas parecen pequeñas cuentas.",
             "imagen": "img/productos/cola-burro.jpg",
+            "imagen_carrusel": "img/carrusel/cola-burro-slide.jpg",
             "destacado": true,
             "oferta": true,
             "caracteristicas": {
@@ -964,6 +962,7 @@
             "precio": 950,
             "descripcion": "Pequeño cactus redondo con espinas blancas. Perfecto para micro-espacios.",
             "imagen": "img/productos/bola-nieve.jpg",
+            "imagen_carrusel": "img/carrusel/bola-nieve-slide.jpg",
             "destacado": false,
             "oferta": false,
             "caracteristicas": {
@@ -982,6 +981,7 @@
             "precio": 1450,
             "descripcion": "Planta medicinal con múltiples usos. Perfecta para tener cerca en el trabajo.",
             "imagen": "img/productos/aloe-vera.jpg",
+            "imagen_carrusel": "img/carrusel/aloe-vera-slide.jpg",
             "destacado": true,
             "oferta": true,
             "caracteristicas": {
@@ -1000,6 +1000,7 @@
             "precio": 1800,
             "descripcion": "Cactus con forma de estrella, sin espinas. Muy buscado por coleccionistas.",
             "imagen": "img/productos/estrella.jpg",
+            "imagen_carrusel": "img/carrusel/estrella-slide.jpg",
             "destacado": true,
             "oferta": false,
             "caracteristicas": {
@@ -1018,6 +1019,7 @@
             "precio": 1300,
             "descripcion": "Parecido a la cola de burro pero con hojas más pequeñas y compactas.",
             "imagen": "img/productos/burrito.jpg",
+            "imagen_carrusel": "img/carrusel/burrito-slide.jpg",
             "destacado": false,
             "oferta": false,
             "caracteristicas": {
@@ -1036,6 +1038,7 @@
             "precio": 1600,
             "descripcion": "Cactus que florece en invierno. Sus flores rosas o rojas son espectaculares.",
             "imagen": "img/productos/navidad.jpg",
+            "imagen_carrusel": "img/carrusel/navidad-slide.jpg",
             "destacado": true,
             "oferta": true,
             "caracteristicas": {
@@ -1048,7 +1051,7 @@
         }];
 
         // ============================================================
-        // 3. ESTADO DE LA APLICACIÓN
+        // 4. ESTADO DE LA APLICACIÓN
         // ============================================================
         let plantas = [];
         let seccionActual = 'inicio';
@@ -1057,7 +1060,7 @@
         let slideActual = 0;
 
         // ============================================================
-        // 4. CARGAR DATOS DESDE data.json
+        // 5. CARGAR DATOS DESDE data.json
         // ============================================================
         async function cargarDatos() {
             try {
@@ -1065,7 +1068,16 @@
                 if (!response.ok) throw new Error('No se encontró data.json');
                 const data = await response.json();
                 plantas = data.plantas || [];
+                
+                // CARGAR CONFIGURACIÓN DESDE JSON
+                if (data.config) {
+                    config.placeholder = data.config.placeholder || config.placeholder;
+                    config.carrusel_default = data.config.carrusel_default || config.carrusel_default;
+                }
+                
                 console.log('✅ Datos cargados desde data.json');
+                console.log('📸 Placeholder:', config.placeholder);
+                console.log('📸 Carrusel default:', config.carrusel_default);
             } catch (error) {
                 console.warn('⚠️ Usando datos de prueba (data.json no encontrado)');
                 plantas = plantasData;
@@ -1074,7 +1086,7 @@
         }
 
         // ============================================================
-        // 5. INICIALIZAR APLICACIÓN
+        // 6. INICIALIZAR APLICACIÓN
         // ============================================================
         function inicializarApp() {
             generarCategorias();
@@ -1088,7 +1100,7 @@
         }
 
         // ============================================================
-        // 6. GENERAR CATEGORÍAS
+        // 7. GENERAR CATEGORÍAS
         // ============================================================
         function generarCategorias() {
             const container = document.getElementById('categoriasRapidas');
@@ -1105,25 +1117,42 @@
         }
 
         // ============================================================
-        // 7. GENERAR CARRUSEL (800x400px)
+        // 8. GENERAR CARRUSEL CON IMÁGENES DESDE JSON
         // ============================================================
         function generarCarrusel() {
             const slidesContainer = document.getElementById('carruselSlides');
             const indicadores = document.getElementById('carruselIndicadores');
 
-            const destacados = plantas.filter(p => p.destacado).slice(0, 4);
-            if (destacados.length === 0) destacados.push(...plantas.slice(0, 3));
+            // Seleccionar plantas destacadas (máximo 4)
+            let destacados = plantas.filter(p => p.destacado).slice(0, 4);
+            
+            // Si no hay destacados, usar las primeras 3
+            if (destacados.length === 0) {
+                destacados = plantas.slice(0, 3);
+            }
 
-            slidesContainer.innerHTML = destacados.map((p, index) => `
-                        <div class="carrusel-slide" style="background: linear-gradient(135deg, ${index % 2 === 0 ? '#2d6a4f' : '#52b788'}, ${index % 3 === 0 ? '#1e4a3a' : '#40916c'});">
-                            <div class="slide-content">
-                                <h2>🌵 ${p.nombre}</h2>
-                                <p>${p.descripcion.substring(0, 60)}${p.descripcion.length > 60 ? '...' : ''}</p>
-                                <p style="font-size:1.2rem;font-weight:700;">$${p.precio}</p>
-                            </div>
+            // Generar slides con imagen desde JSON
+            slidesContainer.innerHTML = destacados.map((p, index) => {
+                // Usar imagen_carrusel si existe, si no usar imagen normal, si no usar config.carrusel_default
+                const imagenSlide = p.imagen_carrusel || p.imagen || config.carrusel_default;
+                
+                return `
+                    <div class="carrusel-slide" style="
+                        background-image: url('${imagenSlide}');
+                        background-size: cover;
+                        background-position: center;
+                        position: relative;
+                    ">
+                        <div class="slide-content">
+                            <h2>🌵 ${p.nombre}</h2>
+                            <p>${p.descripcion ? p.descripcion.substring(0, 60) : ''}${p.descripcion && p.descripcion.length > 60 ? '...' : ''}</p>
+                            <p style="font-size:1.2rem;font-weight:700;">$${p.precio}</p>
                         </div>
-                    `).join('');
+                    </div>
+                `;
+            }).join('');
 
+            // Generar indicadores
             indicadores.innerHTML = destacados.map((_, index) =>
                 `<span class="${index === 0 ? 'active' : ''}" data-slide="${index}"></span>`
             ).join('');
@@ -1159,7 +1188,7 @@
         }
 
         // ============================================================
-        // 8. RENDERIZAR PRODUCTOS (400x400px)
+        // 9. RENDERIZAR PRODUCTOS CON PLACEHOLDER DESDE JSON
         // ============================================================
         function renderizarProductos(lista) {
             const grid = document.getElementById('productosGrid');
@@ -1171,10 +1200,10 @@
             grid.innerHTML = lista.map(p => `
                         <div class="planta-card" data-id="${p.id}">
                             <div class="imagen-container">
-                                <img src="${p.imagen || 'img/placeholder.jpg'}" 
+                                <img src="${p.imagen || config.placeholder}" 
                                      alt="${p.nombre}" 
                                      loading="lazy"
-                                     onerror="this.src='img/placeholder.jpg'">
+                                     onerror="this.src='${config.placeholder}'">
                                 ${p.oferta ? '<span class="badge oferta">⭐ Oferta</span>' : ''}
                                 ${p.destacado && !p.oferta ? '<span class="badge">✨ Destacado</span>' : ''}
                             </div>
@@ -1204,7 +1233,7 @@
         }
 
         // ============================================================
-        // 9. RENDERIZAR OFERTAS
+        // 10. RENDERIZAR OFERTAS CON PLACEHOLDER DESDE JSON
         // ============================================================
         function renderizarOfertas() {
             const grid = document.getElementById('ofertasGrid');
@@ -1217,10 +1246,10 @@
             grid.innerHTML = ofertas.map(p => `
                         <div class="planta-card" data-id="${p.id}">
                             <div class="imagen-container">
-                                <img src="${p.imagen || 'img/placeholder.jpg'}" 
+                                <img src="${p.imagen || config.placeholder}" 
                                      alt="${p.nombre}" 
                                      loading="lazy"
-                                     onerror="this.src='img/placeholder.jpg'">
+                                     onerror="this.src='${config.placeholder}'">
                                 <span class="badge oferta">⭐ Oferta</span>
                             </div>
                             <div class="info">
@@ -1248,7 +1277,7 @@
         }
 
         // ============================================================
-        // 10. RENDERIZAR CUIDADOS Y CONSEJOS
+        // 11. RENDERIZAR CUIDADOS Y CONSEJOS
         // ============================================================
         function renderizarCuidados() {
             const grid = document.getElementById('cuidadosGrid');
@@ -1283,7 +1312,7 @@
         }
 
         // ============================================================
-        // 11. ABRIR WHATSAPP
+        // 12. ABRIR WHATSAPP
         // ============================================================
         function abrirWhatsApp(planta) {
             const numero = '5491123456789'; // CAMBIAR POR EL TUYO
@@ -1292,7 +1321,7 @@
         }
 
         // ============================================================
-        // 12. CONFIGURAR EVENTOS
+        // 13. CONFIGURAR EVENTOS
         // ============================================================
         function configurarEventos() {
             // Menú hamburguesa
@@ -1404,7 +1433,7 @@
         }
 
         // ============================================================
-        // 13. MOSTRAR SECCIÓN
+        // 14. MOSTRAR SECCIÓN
         // ============================================================
         function mostrarSeccion(seccion) {
             seccionActual = seccion;
@@ -1453,7 +1482,7 @@
         }
 
         // ============================================================
-        // 14. INICIAR APLICACIÓN
+        // 15. INICIAR APLICACIÓN
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             cargarDatos();
@@ -1461,8 +1490,9 @@
 
         console.log('🌵 Tienda Cactus & Co. cargada');
         console.log('📝 Para cambiar el número de WhatsApp, busca "const numero" en el script');
-        console.log('🖼️ Tamaños de imagen: Carrusel 800x400px | Productos 400x400px');
+        console.log('🖼️ Tamaños de imagen: Carrusel 800×400px | Productos 400×400px');
         console.log('📁 Coloca tus imágenes en: img/productos/ y img/carrusel/');
+        console.log('⚙️ Configuración cargada desde data.json (placeholder, carrusel_default)');
     </script>
 
 </body>
