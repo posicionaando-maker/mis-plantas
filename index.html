@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>🌵 Cactus & Suculentas - Tienda APP</title>
     
     <!-- ========================================== -->
@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; /* Elimina el flash azul en móviles */
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Variables de color - FÁCIL DE PERSONALIZAR */
@@ -34,13 +34,20 @@
         }
 
         /* Reset base */
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
             background: var(--gris-claro);
             color: var(--texto);
-            padding: 0 0 80px 0; /* Espacio para la barra inferior */
+            padding: 0 0 80px 0;
             line-height: 1.5;
             min-height: 100vh;
+            /* Evita el rebote en iOS */
+            overscroll-behavior: none;
         }
 
         /* ---------- BARRA SUPERIOR (Header APP) ---------- */
@@ -74,7 +81,6 @@
             border-radius: var(--radio-pequeno);
         }
 
-        /* Botón de menú (hamburguesa) - Solo visible en móvil */
         .menu-toggle {
             display: flex;
             flex-direction: column;
@@ -109,7 +115,6 @@
             transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* Menú desplegable (estilo APP) */
         .nav-menu {
             display: none;
             position: absolute;
@@ -154,7 +159,7 @@
             box-shadow: var(--sombra);
             position: relative;
             background: var(--verde-pastel);
-            aspect-ratio: 2/1; /* Proporción 2:1 para imágenes 800x400 */
+            aspect-ratio: 2/1;
         }
 
         .carrusel-slides {
@@ -196,7 +201,6 @@
             opacity: 0.9;
         }
 
-        /* Puntos indicadores del carrusel */
         .carrusel-indicadores {
             position: absolute;
             bottom: 12px;
@@ -222,7 +226,7 @@
             border-radius: 10px;
         }
 
-        /* ---------- BUSCADOR (estilo APP) ---------- */
+        /* ---------- BUSCADOR ---------- */
         .search-container {
             padding: 0 16px 16px;
             position: sticky;
@@ -254,7 +258,6 @@
             box-shadow: 0 0 0 4px rgba(82, 183, 136, 0.15);
         }
 
-        /* Resultados del autocompletar */
         #resultados-busqueda {
             position: absolute;
             top: calc(100% + 6px);
@@ -344,7 +347,7 @@
             border-color: var(--verde-principal);
         }
 
-        /* ---------- GRID DE PRODUCTOS (2 columnas en móvil) ---------- */
+        /* ---------- GRID DE PRODUCTOS ---------- */
         .grid-productos {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -352,7 +355,7 @@
             padding: 0 16px 20px;
         }
 
-        /* ---------- TARJETA DE PLANTA (APP-like) ---------- */
+        /* ---------- TARJETA DE PLANTA ---------- */
         .planta-card {
             background: white;
             border-radius: var(--radio);
@@ -367,7 +370,6 @@
             transform: scale(0.97);
         }
 
-        /* Contenedor de imagen - 1:1 (cuadrada) */
         .planta-card .imagen-container {
             width: 100%;
             aspect-ratio: 1/1;
@@ -387,7 +389,6 @@
             transform: scale(1.05);
         }
 
-        /* Badge de oferta/destacado */
         .planta-card .badge {
             position: absolute;
             top: 10px;
@@ -408,7 +409,6 @@
             color: white;
         }
 
-        /* Información de la planta */
         .planta-card .info {
             padding: 12px 14px 14px;
             flex: 1;
@@ -438,7 +438,6 @@
             font-weight: 600;
         }
 
-        /* Características (iconos) */
         .planta-card .caracteristicas {
             display: flex;
             flex-wrap: wrap;
@@ -473,7 +472,6 @@
             font-weight: 400;
         }
 
-        /* Botón de contacto por WhatsApp */
         .planta-card .btn-whatsapp-planta {
             background: #25D366;
             color: white;
@@ -497,7 +495,7 @@
             background: #1da851;
         }
 
-        /* ---------- SECCIÓN DE CUIDADOS BÁSICOS ---------- */
+        /* ---------- SECCIÓN DE CUIDADOS ---------- */
         .cuidados-section {
             margin: 10px 16px 24px;
             padding: 20px;
@@ -577,7 +575,7 @@
             color: #1e293b;
         }
 
-        /* ---------- BARRA DE NAVEGACIÓN INFERIOR (APP-like) ---------- */
+        /* ---------- BARRA DE NAVEGACIÓN INFERIOR ---------- */
         .app-footer {
             position: fixed;
             bottom: 0;
@@ -632,67 +630,33 @@
             border-radius: 0 0 3px 3px;
         }
 
-        /* ---------- BOTÓN WHATSAPP FLOTANTE ---------- */
-        .whatsapp-flotante {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            z-index: 900;
-            background: #25D366;
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 2rem;
-            box-shadow: 0 4px 25px rgba(37, 211, 102, 0.4);
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 60px;
-            min-width: 60px;
+        /* ---------- UTILIDADES ---------- */
+        .text-center {
+            text-align: center;
+        }
+        .hidden {
+            display: none !important;
         }
 
-        .whatsapp-flotante:active {
-            transform: scale(0.9);
-        }
-
-        .whatsapp-flotante .pulso {
-            animation: pulso 2s infinite;
-        }
-
-        @keyframes pulso {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        /* ---------- RESPONSIVE (Tablet y Desktop) ---------- */
+        /* ---------- RESPONSIVE ---------- */
         @media (min-width: 600px) {
             .grid-productos {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 18px;
                 padding: 0 24px 24px;
             }
-
             .cuidados-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
-
             .search-container {
                 padding: 0 24px 18px;
             }
-
             .categorias-rapidas {
                 padding: 0 24px 18px;
             }
-
             .carrusel-container {
                 margin: 20px 24px 24px;
             }
-
             .cuidados-section,
             .consejos-section {
                 margin: 10px 24px 24px;
@@ -707,40 +671,32 @@
                 margin: 0 auto;
                 padding: 0 32px 32px;
             }
-
             .search-container {
                 max-width: 600px;
                 margin: 0 auto;
                 padding: 0 32px 18px;
             }
-
             .categorias-rapidas {
                 max-width: 900px;
                 margin: 0 auto;
                 padding: 0 32px 18px;
                 justify-content: center;
             }
-
             .carrusel-container {
                 max-width: 1000px;
                 margin: 24px auto 28px;
             }
-
             .cuidados-section,
             .consejos-section {
                 max-width: 900px;
                 margin: 10px auto 24px;
             }
-
             .app-header {
                 padding: 16px 40px;
             }
-
-            /* En desktop, el menú se muestra siempre */
             .menu-toggle {
                 display: none;
             }
-
             .nav-menu {
                 display: flex !important;
                 position: static;
@@ -752,41 +708,21 @@
                 border-radius: 0;
                 width: auto;
             }
-
             .nav-menu a {
                 padding: 8px 16px;
                 min-height: auto;
                 background: transparent;
             }
-
             .nav-menu a:hover {
                 background: var(--verde-pastel);
             }
-        }
-
-        /* ---------- UTILIDADES ---------- */
-        .text-center {
-            text-align: center;
-        }
-
-        .mt-16 {
-            margin-top: 16px;
-        }
-
-        .mb-16 {
-            margin-bottom: 16px;
-        }
-
-        /* Ocultar elementos */
-        .hidden {
-            display: none !important;
         }
     </style>
 </head>
 <body>
 
     <!-- ========================================== -->
-    <!-- BARRA SUPERIOR (Header APP)               -->
+    <!-- BARRA SUPERIOR                            -->
     <!-- ========================================== -->
     <header class="app-header">
         <div class="logo">
@@ -812,21 +748,16 @@
     <!-- ========================================== -->
     <main>
 
-        <!-- ---------- CARRUSEL DE DESTACADOS ---------- -->
+        <!-- ---------- CARRUSEL ---------- -->
         <section id="seccion-inicio">
             <div class="carrusel-container" id="carrusel">
-                <div class="carrusel-slides" id="carruselSlides">
-                    <!-- Las diapositivas se generan con JavaScript -->
-                </div>
-                <div class="carrusel-indicadores" id="carruselIndicadores">
-                    <!-- Indicadores generados por JavaScript -->
-                </div>
+                <div class="carrusel-slides" id="carruselSlides"></div>
+                <div class="carrusel-indicadores" id="carruselIndicadores"></div>
             </div>
 
-            <!-- ---------- CATEGORÍAS RÁPIDAS ---------- -->
+            <!-- ---------- CATEGORÍAS ---------- -->
             <div class="categorias-rapidas" id="categoriasRapidas">
                 <button class="cat-btn active" data-categoria="todos">🌵 Todos</button>
-                <!-- Las categorías se generan con JavaScript -->
             </div>
         </section>
 
@@ -841,14 +772,13 @@
         <!-- ---------- GRID DE PRODUCTOS ---------- -->
         <section id="seccion-catalogo">
             <div class="grid-productos" id="productosGrid">
-                <!-- Las tarjetas se generan con JavaScript -->
                 <p class="text-center" style="grid-column:1/-1;color:#6b7280;padding:40px 0;">
                     🌵 Cargando plantas...
                 </p>
             </div>
         </section>
 
-        <!-- ---------- OFERTAS (sección oculta por defecto) ---------- -->
+        <!-- ---------- OFERTAS ---------- -->
         <section id="seccion-ofertas" class="hidden">
             <div style="padding:0 16px 16px;">
                 <h2 style="font-size:1.3rem;color:var(--verde-principal);display:flex;align-items:center;gap:10px;">
@@ -856,29 +786,22 @@
                 </h2>
                 <p style="color:#6b7280;font-size:0.9rem;">Plantas destacadas para tu espacio de trabajo</p>
             </div>
-            <div class="grid-productos" id="ofertasGrid">
-                <!-- Se genera con JavaScript -->
-            </div>
+            <div class="grid-productos" id="ofertasGrid"></div>
         </section>
 
-        <!-- ---------- SECCIÓN DE CUIDADOS ---------- -->
+        <!-- ---------- CUIDADOS ---------- -->
         <section id="seccion-cuidados" class="hidden">
             <div class="cuidados-section">
                 <h2>💚 Cuidados Básicos para Cactus y Suculentas</h2>
-                <div class="cuidados-grid" id="cuidadosGrid">
-                    <!-- Generado con JavaScript -->
-                </div>
+                <div class="cuidados-grid" id="cuidadosGrid"></div>
             </div>
-
             <div class="consejos-section">
                 <h3>🏢 Consejos para tu Oficina</h3>
-                <ul id="consejosLista">
-                    <!-- Generado con JavaScript -->
-                </ul>
+                <ul id="consejosLista"></ul>
             </div>
         </section>
 
-        <!-- ---------- SECCIÓN DE CONTACTO ---------- -->
+        <!-- ---------- CONTACTO ---------- -->
         <section id="seccion-contacto" class="hidden">
             <div style="padding:20px 16px;text-align:center;">
                 <h2 style="font-size:1.3rem;color:var(--verde-principal);">📞 Contacto</h2>
@@ -912,7 +835,7 @@
     </main>
 
     <!-- ========================================== -->
-    <!-- BARRA DE NAVEGACIÓN INFERIOR (APP-like)    -->
+    <!-- BARRA DE NAVEGACIÓN INFERIOR               -->
     <!-- ========================================== -->
     <footer class="app-footer" id="appFooter">
         <button class="nav-item active" data-seccion="inicio">
@@ -938,20 +861,45 @@
     </footer>
 
     <!-- ========================================== -->
-    <!-- BOTÓN WHATSAPP FLOTANTE                    -->
-    <!-- ========================================== -->
-    <button class="whatsapp-flotante" id="whatsappFlotante" aria-label="Contactar por WhatsApp">
-        <span class="pulso">💬</span>
-    </button>
-
-    <!-- ========================================== -->
     <!-- SCRIPTS                                    -->
     <!-- ========================================== -->
     <script>
         // ============================================================
-        // 1. DATOS DE PRUEBA (se cargan desde data.json si existe)
-        //    - Estructura completa para cactus y suculentas
-        //    - Incluye todos los campos que pediste
+        // 1. OCULTAR BARRA DE NAVEGACIÓN DEL NAVEGADOR
+        //    - Esto hace que la web se vea como una app nativa
+        // ============================================================
+        function ocultarBarraNavegacion() {
+            // Solicitar pantalla completa en dispositivos móviles
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(() => {
+                    // Silenciar error si no se permite (ej: escritorio)
+                });
+            }
+            
+            // Para iOS (Safari) - ocultar barras con scroll
+            window.scrollTo(0, 1);
+            
+            // También intentar con la API de pantalla completa específica para móviles
+            if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
+            }
+        }
+
+        // Intentar ocultar al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pequeño retraso para asegurar que la página está lista
+            setTimeout(ocultarBarraNavegacion, 500);
+        });
+
+        // También al hacer clic en cualquier parte (para usuarios que salen del modo)
+        document.addEventListener('click', function() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                setTimeout(ocultarBarraNavegacion, 300);
+            }
+        });
+
+        // ============================================================
+        // 2. DATOS DE PRUEBA (se cargan desde data.json si existe)
         // ============================================================
         let plantasData = [{
             "id": 1,
@@ -1100,7 +1048,7 @@
         }];
 
         // ============================================================
-        // 2. ESTADO DE LA APLICACIÓN
+        // 3. ESTADO DE LA APLICACIÓN
         // ============================================================
         let plantas = [];
         let seccionActual = 'inicio';
@@ -1109,8 +1057,7 @@
         let slideActual = 0;
 
         // ============================================================
-        // 3. FUNCIÓN PARA CARGAR DATOS DESDE data.json
-        //    - Si falla, usa los datos de prueba
+        // 4. CARGAR DATOS DESDE data.json
         // ============================================================
         async function cargarDatos() {
             try {
@@ -1123,53 +1070,34 @@
                 console.warn('⚠️ Usando datos de prueba (data.json no encontrado)');
                 plantas = plantasData;
             }
-            // Inicializar la app
             inicializarApp();
         }
 
         // ============================================================
-        // 4. INICIALIZAR APLICACIÓN
+        // 5. INICIALIZAR APLICACIÓN
         // ============================================================
         function inicializarApp() {
-            // Generar categorías únicas desde los datos
             generarCategorias();
-
-            // Generar carrusel
             generarCarrusel();
-
-            // Renderizar productos
             renderizarProductos(plantas);
-
-            // Renderizar ofertas
             renderizarOfertas();
-
-            // Renderizar cuidados
             renderizarCuidados();
-
-            // Renderizar consejos
             renderizarConsejos();
-
-            // Configurar eventos
             configurarEventos();
-
-            // Mostrar sección inicial
             mostrarSeccion('inicio');
         }
 
         // ============================================================
-        // 5. GENERAR CATEGORÍAS (desde los datos)
+        // 6. GENERAR CATEGORÍAS
         // ============================================================
         function generarCategorias() {
             const container = document.getElementById('categoriasRapidas');
-            // Obtener tipos únicos
             const tipos = [...new Set(plantas.map(p => p.tipo))];
-            // Limpiar y agregar botones
             container.innerHTML = `<button class="cat-btn active" data-categoria="todos">🌵 Todos</button>`;
             tipos.forEach(tipo => {
                 const btn = document.createElement('button');
                 btn.className = 'cat-btn';
                 btn.dataset.categoria = tipo;
-                // Icono según tipo
                 const icono = tipo === 'cactus' ? '🌵' : '🌱';
                 btn.textContent = `${icono} ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}s`;
                 container.appendChild(btn);
@@ -1177,22 +1105,15 @@
         }
 
         // ============================================================
-        // 6. GENERAR CARRUSEL
-        //    - Tamaño de imagen: 800x400px (2:1)
+        // 7. GENERAR CARRUSEL (800x400px)
         // ============================================================
         function generarCarrusel() {
             const slidesContainer = document.getElementById('carruselSlides');
             const indicadores = document.getElementById('carruselIndicadores');
 
-            // Seleccionar plantas destacadas para el carrusel (máximo 4)
             const destacados = plantas.filter(p => p.destacado).slice(0, 4);
+            if (destacados.length === 0) destacados.push(...plantas.slice(0, 3));
 
-            if (destacados.length === 0) {
-                // Si no hay destacados, usar los primeros 3
-                destacados.push(...plantas.slice(0, 3));
-            }
-
-            // Generar slides
             slidesContainer.innerHTML = destacados.map((p, index) => `
                         <div class="carrusel-slide" style="background: linear-gradient(135deg, ${index % 2 === 0 ? '#2d6a4f' : '#52b788'}, ${index % 3 === 0 ? '#1e4a3a' : '#40916c'});">
                             <div class="slide-content">
@@ -1203,33 +1124,25 @@
                         </div>
                     `).join('');
 
-            // Generar indicadores
             indicadores.innerHTML = destacados.map((_, index) =>
                 `<span class="${index === 0 ? 'active' : ''}" data-slide="${index}"></span>`
             ).join('');
 
-            // Iniciar auto-slide
             iniciarCarrusel(destacados.length);
         }
 
-        // ============================================================
-        // 7. AUTO-SLIDE DEL CARRUSEL
-        // ============================================================
         function iniciarCarrusel(totalSlides) {
             if (carruselInterval) clearInterval(carruselInterval);
-
             carruselInterval = setInterval(() => {
                 slideActual = (slideActual + 1) % totalSlides;
                 moverCarrusel(slideActual);
             }, 5000);
 
-            // Eventos para los indicadores
             document.querySelectorAll('.carrusel-indicadores span').forEach(el => {
                 el.addEventListener('click', function() {
                     const index = parseInt(this.dataset.slide);
                     slideActual = index;
                     moverCarrusel(index);
-                    // Reiniciar intervalo
                     clearInterval(carruselInterval);
                     iniciarCarrusel(totalSlides);
                 });
@@ -1239,27 +1152,19 @@
         function moverCarrusel(index) {
             const slides = document.getElementById('carruselSlides');
             const indicadores = document.querySelectorAll('.carrusel-indicadores span');
-
             slides.style.transform = `translateX(-${index * 100}%)`;
-
             indicadores.forEach((el, i) => {
                 el.classList.toggle('active', i === index);
             });
         }
 
         // ============================================================
-        // 8. RENDERIZAR PRODUCTOS EN EL GRID
-        //    - Tamaño de imagen: 400x400px (cuadrada)
+        // 8. RENDERIZAR PRODUCTOS (400x400px)
         // ============================================================
         function renderizarProductos(lista) {
             const grid = document.getElementById('productosGrid');
-
             if (!lista || lista.length === 0) {
-                grid.innerHTML = `
-                            <p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:40px 0;">
-                                🌵 No hay plantas disponibles
-                            </p>
-                        `;
+                grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:40px 0;">🌵 No hay plantas disponibles</p>`;
                 return;
             }
 
@@ -1278,27 +1183,16 @@
                                 <div class="nombre">${p.nombre}</div>
                                 <div class="nombre-cientifico">${p.nombre_cientifico || ''}</div>
                                 <div class="caracteristicas">
-                                    <span class="caracteristica">
-                                        <span class="icono">☀️</span> ${p.caracteristicas?.luz || 'N/A'}
-                                    </span>
-                                    <span class="caracteristica">
-                                        <span class="icono">💧</span> ${p.caracteristicas?.riego || 'N/A'}
-                                    </span>
-                                    <span class="caracteristica">
-                                        <span class="icono">📏</span> ${p.caracteristicas?.tamano || 'N/A'}
-                                    </span>
+                                    <span class="caracteristica"><span class="icono">☀️</span> ${p.caracteristicas?.luz || 'N/A'}</span>
+                                    <span class="caracteristica"><span class="icono">💧</span> ${p.caracteristicas?.riego || 'N/A'}</span>
+                                    <span class="caracteristica"><span class="icono">📏</span> ${p.caracteristicas?.tamano || 'N/A'}</span>
                                 </div>
-                                <div class="precio">
-                                    <span class="simbolo">$</span>${p.precio.toLocaleString()}
-                                </div>
-                                <button class="btn-whatsapp-planta" data-id="${p.id}">
-                                    💬 Consultar por WhatsApp
-                                </button>
+                                <div class="precio"><span class="simbolo">$</span>${p.precio.toLocaleString()}</div>
+                                <button class="btn-whatsapp-planta" data-id="${p.id}">💬 Consultar por WhatsApp</button>
                             </div>
                         </div>
                     `).join('');
 
-            // Eventos para los botones de WhatsApp de cada tarjeta
             document.querySelectorAll('.btn-whatsapp-planta').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1315,17 +1209,11 @@
         function renderizarOfertas() {
             const grid = document.getElementById('ofertasGrid');
             const ofertas = plantas.filter(p => p.oferta);
-
             if (ofertas.length === 0) {
-                grid.innerHTML = `
-                            <p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:30px 0;">
-                                🌵 No hay ofertas disponibles en este momento
-                            </p>
-                        `;
+                grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:#6b7280;padding:30px 0;">🌵 No hay ofertas disponibles</p>`;
                 return;
             }
 
-            // Usamos la misma función de renderizado pero con un wrapper
             grid.innerHTML = ofertas.map(p => `
                         <div class="planta-card" data-id="${p.id}">
                             <div class="imagen-container">
@@ -1340,24 +1228,15 @@
                                 <div class="nombre">${p.nombre}</div>
                                 <div class="nombre-cientifico">${p.nombre_cientifico || ''}</div>
                                 <div class="caracteristicas">
-                                    <span class="caracteristica">
-                                        <span class="icono">☀️</span> ${p.caracteristicas?.luz || 'N/A'}
-                                    </span>
-                                    <span class="caracteristica">
-                                        <span class="icono">💧</span> ${p.caracteristicas?.riego || 'N/A'}
-                                    </span>
+                                    <span class="caracteristica"><span class="icono">☀️</span> ${p.caracteristicas?.luz || 'N/A'}</span>
+                                    <span class="caracteristica"><span class="icono">💧</span> ${p.caracteristicas?.riego || 'N/A'}</span>
                                 </div>
-                                <div class="precio">
-                                    <span class="simbolo">$</span>${p.precio.toLocaleString()}
-                                </div>
-                                <button class="btn-whatsapp-planta" data-id="${p.id}">
-                                    💬 Consultar por WhatsApp
-                                </button>
+                                <div class="precio"><span class="simbolo">$</span>${p.precio.toLocaleString()}</div>
+                                <button class="btn-whatsapp-planta" data-id="${p.id}">💬 Consultar por WhatsApp</button>
                             </div>
                         </div>
                     `).join('');
 
-            // Eventos para los botones de WhatsApp en ofertas
             document.querySelectorAll('#ofertasGrid .btn-whatsapp-planta').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1369,60 +1248,27 @@
         }
 
         // ============================================================
-        // 10. RENDERIZAR CUIDADOS BÁSICOS
+        // 10. RENDERIZAR CUIDADOS Y CONSEJOS
         // ============================================================
         function renderizarCuidados() {
             const grid = document.getElementById('cuidadosGrid');
-
-            const cuidados = [{
-                icono: '☀️',
-                titulo: 'Luz',
-                descripcion: 'Sol indirecto para suculentas, directo para cactus'
-            }, {
-                icono: '💧',
-                titulo: 'Riego',
-                descripcion: 'Espera que el sustrato se seque completamente'
-            }, {
-                icono: '🌡️',
-                titulo: 'Temperatura',
-                descripcion: 'Entre 18-28°C, evitar corrientes de aire'
-            }, {
-                icono: '🏺',
-                titulo: 'Maceta',
-                descripcion: 'Con drenaje, tamaño adecuado a la raíz'
-            }, {
-                icono: '🧪',
-                titulo: 'Sustrato',
-                descripcion: 'Mezcla con arena y perlita para buen drenaje'
-            }, {
-                icono: '💚',
-                titulo: 'Abono',
-                descripcion: 'Fertilizante específico en primavera-verano'
-            }, {
-                icono: '🐛',
-                titulo: 'Plagas',
-                descripcion: 'Revisar cochinillas y hongos, tratar con jabón potásico'
-            }, {
-                icono: '✂️',
-                titulo: 'Poda',
-                descripcion: 'Quitar hojas secas y flores marchitas'
-            }];
-
-            grid.innerHTML = cuidados.map(c => `
-                        <div class="cuidado-item">
-                            <span class="icono">${c.icono}</span>
-                            <h4>${c.titulo}</h4>
-                            <p>${c.descripcion}</p>
-                        </div>
-                    `).join('');
+            const cuidados = [
+                { icono: '☀️', titulo: 'Luz', desc: 'Sol indirecto para suculentas, directo para cactus' },
+                { icono: '💧', titulo: 'Riego', desc: 'Espera que el sustrato se seque completamente' },
+                { icono: '🌡️', titulo: 'Temperatura', desc: 'Entre 18-28°C, evitar corrientes de aire' },
+                { icono: '🏺', titulo: 'Maceta', desc: 'Con drenaje, tamaño adecuado a la raíz' },
+                { icono: '🧪', titulo: 'Sustrato', desc: 'Mezcla con arena y perlita para buen drenaje' },
+                { icono: '💚', titulo: 'Abono', desc: 'Fertilizante específico en primavera-verano' },
+                { icono: '🐛', titulo: 'Plagas', desc: 'Revisar cochinillas y hongos, tratar con jabón potásico' },
+                { icono: '✂️', titulo: 'Poda', desc: 'Quitar hojas secas y flores marchitas' }
+            ];
+            grid.innerHTML = cuidados.map(c =>
+                `<div class="cuidado-item"><span class="icono">${c.icono}</span><h4>${c.titulo}</h4><p>${c.desc}</p></div>`
+            ).join('');
         }
 
-        // ============================================================
-        // 11. RENDERIZAR CONSEJOS PARA OFICINAS
-        // ============================================================
         function renderizarConsejos() {
             const lista = document.getElementById('consejosLista');
-
             const consejos = [
                 'Coloca suculentas en tu escritorio: reducen el estrés y mejoran la concentración',
                 'Elige macetas con colores neutros para integrarlas con la decoración de la oficina',
@@ -1433,93 +1279,65 @@
                 'Rota las plantas cada semana para que reciban luz pareja y crezcan rectas',
                 'Usa macetas con autorriego para evitar olvidos en fines de semana largos'
             ];
-
             lista.innerHTML = consejos.map(c => `<li>${c}</li>`).join('');
         }
 
         // ============================================================
-        // 12. ABRIR WHATSAPP CON MENSAJE PERSONALIZADO
-        //     - Mensaje: "Hola, me interesa [planta]"
+        // 11. ABRIR WHATSAPP
         // ============================================================
         function abrirWhatsApp(planta) {
-            // Número de WhatsApp - CAMBIAR POR EL TUYO
-            const numero = '5491123456789';
-
+            const numero = '5491123456789'; // CAMBIAR POR EL TUYO
             const mensaje = `Hola 🌵 Me interesa la planta *${planta.nombre}* (${planta.nombre_cientifico || ''}). ¿Podrían darme más información?`;
-
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
+            window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
         // ============================================================
-        // 13. WHATSAPP FLOTANTE (botón global)
-        // ============================================================
-        document.getElementById('whatsappFlotante').addEventListener('click', function() {
-            const numero = '5491123456789';
-            const mensaje = 'Hola 🌵 Me interesa conocer sus plantas y suculentas para mi espacio de trabajo.';
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
-        });
-
-        // ============================================================
-        // 14. CONFIGURAR EVENTOS
+        // 12. CONFIGURAR EVENTOS
         // ============================================================
         function configurarEventos() {
-            // --- Menú hamburguesa ---
+            // Menú hamburguesa
             const toggle = document.getElementById('menuToggle');
             const menu = document.getElementById('navMenu');
-
             toggle.addEventListener('click', function() {
                 menu.classList.toggle('active');
                 this.classList.toggle('active');
             });
 
-            // Cerrar menú al seleccionar una opción
             document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const seccion = this.dataset.seccion;
                     if (seccion) {
                         mostrarSeccion(seccion);
-                        // Cerrar menú
                         menu.classList.remove('active');
                         toggle.classList.remove('active');
                     }
                 });
             });
 
-            // --- Navegación inferior (footer) ---
+            // Navegación inferior
             document.querySelectorAll('.app-footer .nav-item').forEach(item => {
                 item.addEventListener('click', function() {
                     const seccion = this.dataset.seccion;
-                    if (seccion) {
-                        mostrarSeccion(seccion);
-                    }
+                    if (seccion) mostrarSeccion(seccion);
                 });
             });
 
-            // --- Filtros por categoría ---
+            // Filtros
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Actualizar estado visual
                     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-
                     categoriaActual = this.dataset.categoria;
-
-                    // Filtrar productos
                     const filtrados = categoriaActual === 'todos' ?
                         plantas :
                         plantas.filter(p => p.tipo === categoriaActual);
-
                     renderizarProductos(filtrados);
-
-                    // Cambiar a sección catálogo
                     mostrarSeccion('catalogo');
                 });
             });
 
-            // --- Buscador con autocompletar ---
+            // Buscador
             const buscador = document.getElementById('buscador');
             const resultados = document.getElementById('resultados-busqueda');
             let timeout = null;
@@ -1527,7 +1345,6 @@
             buscador.addEventListener('input', function() {
                 clearTimeout(timeout);
                 const termino = this.value.trim().toLowerCase();
-
                 if (termino.length < 2) {
                     resultados.style.display = 'none';
                     return;
@@ -1563,13 +1380,11 @@
 
                     resultados.style.display = 'block';
 
-                    // Al hacer clic en un resultado, ir al catálogo filtrado
                     document.querySelectorAll('.resultado-item').forEach(item => {
                         item.addEventListener('click', function() {
                             const id = parseInt(this.dataset.id);
                             const planta = plantas.find(p => p.id === id);
                             if (planta) {
-                                // Filtrar solo esa planta
                                 renderizarProductos([planta]);
                                 mostrarSeccion('catalogo');
                                 buscador.value = '';
@@ -1581,36 +1396,25 @@
                 }, 300);
             });
 
-            // Cerrar resultados al hacer clic fuera
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.search-wrapper')) {
                     resultados.style.display = 'none';
                 }
             });
-
-            // --- Cerrar menú al hacer scroll ---
-            document.addEventListener('scroll', () => {
-                if (menu.classList.contains('active')) {
-                    menu.classList.remove('active');
-                    toggle.classList.remove('active');
-                }
-            });
         }
 
         // ============================================================
-        // 15. MOSTRAR SECCIÓN (navegación APP-like)
+        // 13. MOSTRAR SECCIÓN
         // ============================================================
         function mostrarSeccion(seccion) {
             seccionActual = seccion;
 
-            // Ocultar todas las secciones
             document.getElementById('seccion-inicio').style.display = 'block';
             document.getElementById('seccion-catalogo').style.display = 'block';
             document.getElementById('seccion-ofertas').classList.add('hidden');
             document.getElementById('seccion-cuidados').classList.add('hidden');
             document.getElementById('seccion-contacto').classList.add('hidden');
 
-            // Mostrar la sección seleccionada
             switch (seccion) {
                 case 'inicio':
                     document.getElementById('seccion-inicio').style.display = 'block';
@@ -1619,7 +1423,6 @@
                 case 'catalogo':
                     document.getElementById('seccion-inicio').style.display = 'none';
                     document.getElementById('seccion-catalogo').style.display = 'block';
-                    // Restaurar filtro actual
                     const filtrados = categoriaActual === 'todos' ?
                         plantas :
                         plantas.filter(p => p.tipo === categoriaActual);
@@ -1642,25 +1445,20 @@
                     break;
             }
 
-            // Actualizar barra inferior
             document.querySelectorAll('.app-footer .nav-item').forEach(item => {
                 item.classList.toggle('active', item.dataset.seccion === seccion);
             });
 
-            // Scroll al inicio
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // ============================================================
-        // 16. INICIAR APLICACIÓN
+        // 14. INICIAR APLICACIÓN
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             cargarDatos();
         });
 
-        // ============================================================
-        // 17. EXPONER FUNCIONES PARA DEBUG (opcional)
-        // ============================================================
         console.log('🌵 Tienda Cactus & Co. cargada');
         console.log('📝 Para cambiar el número de WhatsApp, busca "const numero" en el script');
         console.log('🖼️ Tamaños de imagen: Carrusel 800x400px | Productos 400x400px');
